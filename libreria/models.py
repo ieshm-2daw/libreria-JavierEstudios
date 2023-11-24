@@ -9,43 +9,48 @@ class Usuario(AbstractUser):
     def __str__ (self):
         return self.dni
 
-class Libro(models.Model):
-    titulo = models.CharField(max_length=100)
-    autores = models.CharField(max_length=50)
-    editorial = models.CharField(max_length=50)
-    fechaPublicacion = models.DateField()
-    genero = models.CharField(max_length=100)
-    isbn = models.IntegerField()
-    resumen = models.TextField()
-    disponibilidad = models.CharField(max_length=22)
-    portada = models.ImageField(upload_to='libro')
-
-    def __str__ (self):
-        return self.isbn
-
 class Autor(models.Model):
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=100)
     bibliografia = models.TextField()
-    foto = models.ImageField(upload_to='autor')
+    foto = models.ImageField(upload_to='autores/', null=True, blank=True)
 
     def __str__ (self):
         return self.nombre
 
 class Editorial(models.Model):
-    nombre = models.CharField(max_length=50)
-    direccion = models.CharField(max_length=50)
-    sitioWeb = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=100)
+    direccion = models.CharField(max_length=200)
+    sitioWeb = models.URLField()
 
     def __str__ (self):
         return self.nombre
+    
+class Libro(models.Model):
+    CHOICES_DISPONIBILIDAD = (
+        ('disponible', 'Disponible'),
+        ('prestado', 'Prestado'),
+        ('en_proceso', 'En proceso de prestamo'))
+
+    titulo = models.CharField(max_length=100)
+    autores = models.ManyToManyField(Autor)
+    editorial = models.ForeignKey(Editorial, on_delete=models.CASCADE)
+    fechaPublicacion = models.DateField()
+    genero = models.CharField(max_length=100)
+    isbn = models.CharField(max_length=13)
+    resumen = models.TextField()
+    disponibilidad = models.CharField(max_length=22, value=CHOICES_DISPONIBILIDAD)
+    portada = models.ImageField(upload_to='libros/', null=True, blank=True)
+
+    def __str__ (self):
+        return self.isbn
 
 class Prestamo(models.Model):
-    libroPrestado = models.CharField(max_length=100)
+    libroPrestado = models.ForeignKey(Libro, on_delete=models.CASCADE)
     fechaPrestamo = models.DateField()
-    fechaDevolucion = models.DateField()
-    usuario = models.CharField(max_length=50)
+    fechaDevolucion = models.DateField(null=True, blank=True)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     estado = models.CharField(max_length=50)
 
     def __str__ (self):
-        return self.libroPrestado
+        return self.libroPrestado.titulo
 

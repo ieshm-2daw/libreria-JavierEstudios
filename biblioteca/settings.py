@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['Localhost','127.0.0.1']
 
+AUTH_USER_MODEL = "books.Usuario"
 
 # Application definition
 
