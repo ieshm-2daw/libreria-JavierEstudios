@@ -26,11 +26,11 @@ class Editorial(models.Model):
         return self.nombre
     
 class Libro(models.Model):
-    CHOICES_DISPONIBILIDAD = (
+    CHOICES_DISPONIBILIDAD = [
         ('disponible', 'Disponible'),
         ('prestado', 'Prestado'),
-        ('en_proceso', 'En proceso de prestamo'))
-
+        ('en_proceso', 'En proceso de prestamo'),
+    ]
     titulo = models.CharField(max_length=100)
     autores = models.ManyToManyField(Autor)
     editorial = models.ForeignKey(Editorial, on_delete=models.CASCADE)
@@ -38,19 +38,18 @@ class Libro(models.Model):
     genero = models.CharField(max_length=100)
     isbn = models.CharField(max_length=13)
     resumen = models.TextField()
-    disponibilidad = models.CharField(max_length=22, value=CHOICES_DISPONIBILIDAD)
+    disponibilidad = models.CharField(max_length=10 , choices=CHOICES_DISPONIBILIDAD)
     portada = models.ImageField(upload_to='libros/', null=True, blank=True)
 
     def __str__ (self):
-        return self.isbn
+        return self.titulo
 
 class Prestamo(models.Model):
-    libroPrestado = models.ForeignKey(Libro, on_delete=models.CASCADE)
+    libroPrestado = models.ManyToManyField(Libro)
     fechaPrestamo = models.DateField()
     fechaDevolucion = models.DateField(null=True, blank=True)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     estado = models.CharField(max_length=50)
 
     def __str__ (self):
-        return self.libroPrestado.titulo
-
+        return f"{self.libroPrestado.titulo} {self.fechaPrestamo}"
