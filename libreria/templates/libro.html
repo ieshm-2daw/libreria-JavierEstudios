@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ libro.titulo }}</title>
+    </head>
+    <body>
+        <h1>{{ libro.titulo }}</h1>
+        <p>Autores: </p>
+        <ul>
+            {% for autor in object_list %}
+                <li>{{ autor.nombre }}</li>
+            {% endfor %}
+        </ul>
+        <p>Editorial: {{ libro.editorial }}</p>
+        <p>Genero: {{ libro.genero }}</p>
+        <p>ISBN: {{ libro.isbn }}</p>
+        <p>Resumen: {{ libro.resumen }}</p>
+        <p>disponibilidad: {{ libro.disponibilidad }}</p>
+        <p><img ="{{ libro.portada }}" alt="portada de {{ libro.titulo }}"></p>
+    </body>
+</html>

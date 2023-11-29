@@ -5,6 +5,13 @@
     </head>
     <main>
         <h1>Libreria</h1>
-        <p><a></a></p>
+        <ul>
+            {% for libro in object_list %}
+                <li><a href="{% url 'Detalle' pk=libro.pk %}">{{ libro.titulo }}</a></li>
+                {% empty %}
+                <li>No hay libros</li>
+            {% endfor %}
+        </ul>
+        <p><a href="{% url 'Nuevo_Libro' %}">Nuevo libro</a></p>
     </main>
 </html>

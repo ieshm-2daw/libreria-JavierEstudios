@@ -39,7 +39,7 @@ class Libro(models.Model):
     isbn = models.CharField(max_length=13)
     resumen = models.TextField()
     disponibilidad = models.CharField(max_length=10 , choices=CHOICES_DISPONIBILIDAD)
-    portada = models.ImageField(upload_to='libros/', null=True, blank=True)
+    portada = models.ImageField(upload_to='portadas/', null=True, blank=True)
 
     def __str__ (self):
         return self.titulo
