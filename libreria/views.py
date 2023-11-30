@@ -13,9 +13,11 @@ class Libreria(ListView):
 
 class Libro(DetailView):
     model = Libro
+    template_name = 'libro.html'
 
 class Nuevo(CreateView):
     model = Libro
-    fields = ["titulo","autores","editorial","fechaPublicacion","genero","isbn","resumen","disponibilidad","portada"]
+    fields = [ '__all__' ]
+    #["titulo","autores","editorial","fechaPublicacion","genero","isbn","resumen","disponibilidad","portada"]
     template_name = 'nuevo_libro.html'
-    success_url = reverse_lazy('Liberia')
+    success_url = reverse_lazy('Libreria')

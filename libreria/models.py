@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class Usuario(AbstractUser):
-    dni = models.CharField(max_length=9)
-    dirección = models.CharField(max_length=100)
-    telefono = models.IntegerField()
+    dni = models.CharField(max_length=9, null=True)
+    dirección = models.CharField(max_length=100, null=True)
+    telefono = models.IntegerField(null=True)
 
     def __str__ (self):
         return self.dni

@@ -5,10 +5,15 @@
     </head>
     <body>
         <h1>Nuevo libro</h1>
-        <form action="{% url 'Nuevo_Libro' %}" method='post'>
+        <form action="{% url 'Nuevo_Libro' %}" enctype="multipart/form-data" method='post'>
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Añadir">
         </form>
+        <p>
+            <a href="{% url 'Libreria' %}">
+                Volver a la librería
+            </a>
+        </p>
     </body>
 </html>

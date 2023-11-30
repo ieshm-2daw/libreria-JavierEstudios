@@ -16,6 +16,6 @@
         <p>ISBN: {{ libro.isbn }}</p>
         <p>Resumen: {{ libro.resumen }}</p>
         <p>disponibilidad: {{ libro.disponibilidad }}</p>
-        <p><img ="{{ libro.portada }}" alt="portada de {{ libro.titulo }}"></p>
+        <p><img src="{{ object.portada.url }}" alt="portada de {{ libro.titulo }}"></p>
     </body>
 </html>
