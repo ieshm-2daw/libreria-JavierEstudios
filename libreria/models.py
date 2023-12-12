@@ -26,11 +26,6 @@ class Editorial(models.Model):
         return self.nombre
     
 class Libro(models.Model):
-    CHOICES_DISPONIBILIDAD = [
-        ('disponible', 'Disponible'),
-        ('prestado', 'Prestado'),
-        ('en_proceso', 'En proceso de prestamo'),
-    ]
     titulo = models.CharField(max_length=100)
     autores = models.ManyToManyField(Autor)
     editorial = models.ForeignKey(Editorial, on_delete=models.CASCADE)
@@ -38,11 +33,17 @@ class Libro(models.Model):
     genero = models.CharField(max_length=100)
     isbn = models.CharField(max_length=13)
     resumen = models.TextField()
+    CHOICES_DISPONIBILIDAD = (
+        ('disponible', 'Disponible'),
+        ('prestado', 'Prestado'),
+        ('en_proceso', 'En proceso de prestamo'),
+    )
     disponibilidad = models.CharField(max_length=10 , choices=CHOICES_DISPONIBILIDAD)
     portada = models.ImageField(upload_to='portadas/', null=True, blank=True)
 
     def __str__ (self):
         return self.titulo
+    
 
 class Prestamo(models.Model):
     libroPrestado = models.ManyToManyField(Libro)

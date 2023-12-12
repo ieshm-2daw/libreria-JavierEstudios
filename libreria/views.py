@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -11,13 +10,12 @@ class Libreria(ListView):
     model = Libro
     template_name = 'libreria.html'
 
-class Libro(DetailView):
+class DetalleLibro(DetailView):
     model = Libro
     template_name = 'libro.html'
 
-class Nuevo(CreateView):
+class NuevoLibro (CreateView):
     model = Libro
-    fields = [ '__all__' ]
-    #["titulo","autores","editorial","fechaPublicacion","genero","isbn","resumen","disponibilidad","portada"]
+    fields = ["titulo","autores","editorial","fechaPublicacion","genero","isbn","resumen","disponibilidad","portada"]
     template_name = 'nuevo_libro.html'
     success_url = reverse_lazy('Libreria')
