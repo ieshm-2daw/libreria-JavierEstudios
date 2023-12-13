@@ -18,5 +18,10 @@
         <p>Resumen: {{ object.resumen }}</p>
         <p>disponibilidad: {{ object.disponibilidad }}</p>
         <p><img style="height: 20em;" src="{{ object.portada.url }}" alt="portada de {{ object.titulo }}"></p>
+        <p>
+            <a href="{% url 'Libreria' %}">Volver</a>
+            <a href="{% url 'Editar_Libro' pk=object.pk %}">Editar</a>
+            <a href="{% url 'Eliminar_Libro' pk=object.pk %}">Editar</a>
+        </p>
     </body>
 </html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Eliminar {{ object.titulo }}</title>
+    </head>
+    <body>
+        <h1>Eliminar {{ object.titulo }}</h1>
+        <form action="{% url 'Eliminar_Libro' pk=object.pk %}" enctype="multipart/form-data" method='post'>
+            {% csrf_token %}
+            <p>¿Estás seguro de que quieres eliminar {{ object.title }}?</p>
+            {{ form.as_p }}
+            <input type="submit" value="Eliminar">
+        </form>
+        <p>
+            <a href="{% url 'Libreria' %}">
+                Volver a la librería
+            </a>
+        </p>
+    </body>
+</html>
