@@ -8,3 +8,4 @@ urlpatterns = [
     path('editar_libro/<int:pk>', EditarLibro.as_view(), name="Editar_Libro"),
     path('eliminar_libro/<int:pk>', EditarLibro.as_view(), name="Eliminar_Libro"),
 ]
+
