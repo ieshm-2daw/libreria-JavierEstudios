@@ -10,11 +10,11 @@
         <ul>
             {% for libro in object_list %}
                 <li>
-                    <p>{{ libro.titulo }}</p>
+                    <p>{{ libro.titulo }} <a href="{% url 'Prestar_Libro' pk=libro.pk %}">Prestamo</a></p>
                     <p><img style="height: 20em;" src="{{ libro.portada.url }}" alt="portada de {{ object.titulo }}"></p>
                 </li>
                 {% empty %}
-                <li>No hay libros</li>
+                <li>No hay libros disponibles</li>
             {% endfor %}
         </ul>
     </main>

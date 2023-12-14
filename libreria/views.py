@@ -1,6 +1,7 @@
-from typing import Any
-from django.db.models.query import QuerySet
+from datetime import date
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -38,6 +39,24 @@ class LibreriaDisponibles(ListView):
     def get_queryset(self):
         disponibles = Libro.objects.filter(disponibilidad="disponible")
         return disponibles
+    
+class PrestarLibro(View):
+    template_name = 'prestamo.html'
+    def get(self, request, pk):
+        libro = get_object_or_404(Libro, pk = pk)
+        return render(request, 'prestamo.html', {'libro':libro})
+    
+    def post(self, request, pk):
+        libro = get_object_or_404(Libro, pk = pk)
+        libro.disponibilidad = 'prestado'
+        libro.save()
+
+        Prestamo.objects.create(
+            libro = libro,
+            usuario = request.usuario,
+            fechaPrestamo = date.today()
+        )
+        return redirect('Disponibles', pk = pk)
 
 class LibreriaPrestados(ListView):
     model = Prestamo
