@@ -75,11 +75,25 @@ WSGI_APPLICATION = 'biblioteca.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+"""
+DATABASES = {
+    "default": {
+        "NAME": "libreria_JaviFerA",
+        "ENGINE": "django.db.backends.mysql",
+        "HOST": "192.168.100.5",
+        "PORT": 3306,
+        "USER": "Farre",
+        "PASSWORD": "alumnado",
+        "OPTIONS": {
+            "autocommit": True,
+        },
     }
 }
 
