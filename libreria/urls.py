@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import path, include
 from libreria.views import Libreria, DetalleLibro, NuevoLibro, EditarLibro, EliminarLibro, LibreriaDisponibles, LibreriaPrestados, PrestarLibro
 
 urlpatterns = [
     path('', Libreria.as_view(), name="Libreria"),
+    path('cuentas', include('django.contrib.auth.urls')),
     path('libro_<int:pk>', DetalleLibro.as_view(), name="Libro"),
     path('nuevo_libro', NuevoLibro.as_view(), name="Nuevo_Libro"),
     path('editar_<int:pk>', EditarLibro.as_view(), name="Editar_Libro"),
