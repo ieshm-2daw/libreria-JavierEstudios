@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Editar {{ object.titulo }}</title>
-    </head>
-    <body>
-        <h1>Editar {{ object.titulo }}</h1>
-        <form action="{% url 'Editar_Libro' pk=object.pk %}" enctype="multipart/form-data" method='post'>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Editar">
-        </form>
-        <p>
-            <a href="{% url 'Libreria' %}">
-                Volver a la librería
-            </a>
-        </p>
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Editar {{ object.titulo }}</h1>
+    <form action="{% url 'Editar_Libro' pk=object.pk %}" enctype="multipart/form-data" method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Editar">
+    </form>
+    <p>
+        <a href="{% url 'Libreria' %}">
+            Volver a la librería
+        </a>
+    </p>
+{% endblock %}

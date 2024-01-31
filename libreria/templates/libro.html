@@ -1,27 +1,23 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>{{ object.titulo }}</title>
-    </head>
-    <body>
-        <h1>{{ object.titulo }}</h1>
-        <p>Autores: </p>
-        <ul>
-            {% for autor in object_list %}
-                <li>{{ autor.nombre }}</li>
-            {% endfor %}
-        </ul>
-        <p>Editorial: {{ object.editorial }}</p>
-        <p>Fecha de publicación: {{ object.fechaPublicacion }}</p>
-        <p>Genero: {{ object.genero }}</p>
-        <p>ISBN: {{ object.isbn }}</p>
-        <p>Resumen: {{ object.resumen }}</p>
-        <p>disponibilidad: {{ object.disponibilidad }}</p>
-        <p><img style="height: 20em;" src="{{ object.portada.url }}" alt="portada de {{ object.titulo }}"></p>
-        <p>
-            <a href="{% url 'Libreria' %}">Volver</a>
-            <a href="{% url 'Editar_Libro' pk=object.pk %}">Editar</a>
-            <a href="{% url 'Eliminar_Libro' pk=object.pk %}">Editar</a>
-        </p>
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ object.titulo }}</h1>
+    <p>Autores: </p>
+    <ul>
+        {% for autor in object_list %}
+            <li>{{ autor.nombre }}</li>
+        {% endfor %}
+    </ul>
+    <p>Editorial: {{ object.editorial }}</p>
+    <p>Fecha de publicación: {{ object.fechaPublicacion }}</p>
+    <p>Genero: {{ object.genero }}</p>
+    <p>ISBN: {{ object.isbn }}</p>
+    <p>Resumen: {{ object.resumen }}</p>
+    <p>disponibilidad: {{ object.disponibilidad }}</p>
+    <p><img style="height: 20em;" src="{{ object.portada.url }}" alt="portada de {{ object.titulo }}"></p>
+    <p>
+        <a href="{% url 'Libreria' %}">Volver</a>
+        <a href="{% url 'Editar_Libro' pk=object.pk %}">Editar</a>
+        <a href="{% url 'Eliminar_Libro' pk=object.pk %}">Editar</a>
+    </p>
+{% endblock %}

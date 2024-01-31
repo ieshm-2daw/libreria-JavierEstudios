@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Prestamo de {{ object.titulo }}</title>
-    </head>
-    <body>
-        <h1>Prestamo de {{ object.titulo }}</h1>
-        <form action="{% url 'Prestar_Libro' pk=object.pk %}" method='post'>
-            {% csrf_token %}
-            <p>¿Estás seguro de que quieres pedir prestado {{ object.title }}?</p>
-            {{ form.as_p }}
-            <input type="submit" value="Aceptar">
-        </form>
-        <p>
-            <a href="{% url 'Disponibles' %}">
-                Volver a la librería
-            </a>
-        </p>
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Prestamo de {{ object.titulo }}</h1>
+    <form action="{% url 'Prestar_Libro' pk=object.pk %}" method='post'>
+        {% csrf_token %}
+        <p>¿Estás seguro de que quieres pedir prestado {{ object.title }}?</p>
+        {{ form.as_p }}
+        <input type="submit" value="Aceptar">
+    </form>
+    <p>
+        <a href="{% url 'Disponibles' %}">
+            Volver a la librería
+        </a>
+    </p>
+{% endblock %}
