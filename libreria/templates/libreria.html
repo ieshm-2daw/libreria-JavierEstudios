@@ -2,11 +2,6 @@
 
 {% block content %}
     <h1>Librería</h1>
-    <p>
-        <a href="{% url 'Nuevo_Libro' %}">Nuevo libro</a>
-        <a href="{% url 'Disponibles' %}">Listado Disponibles</a>
-        <a href="{% url 'Prestados' %}">Mis Libros</a>
-    </p>
     <ul>
         {% for libro in object_list %}
             <li>

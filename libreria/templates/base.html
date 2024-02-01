@@ -3,6 +3,11 @@
     <title>Librería</title>
 </head>
 <body>
+    <p>
+        <a href="{% url 'Nuevo_Libro' %}">Nuevo libro</a>
+        <a href="{% url 'Disponibles' %}">Listado Disponibles</a>
+        <a href="{% url 'Prestados' %}">Mis Libros</a>
+    </p>
     {% block content %}
     {% endblock %}
 </body>
