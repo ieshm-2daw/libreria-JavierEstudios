@@ -60,6 +60,9 @@ class PrestarLibro(View):
         return redirect('Disponibles', pk = pk)
 
 class LibreriaPrestados(ListView):
-    model = Prestamo
+    model = Libro
     template_name = 'libreria_prestados.html'
-    
+
+    def get_queryset(self):
+        prestados = Libro.objects.filter(prestados="prestado")
+        return prestados
