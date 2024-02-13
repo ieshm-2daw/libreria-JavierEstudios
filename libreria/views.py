@@ -18,7 +18,7 @@ class DetalleLibro(DetailView):
 
 class NuevoLibro (CreateView):
     model = Libro
-    fields = ["titulo","autores","editorial","fechaPublicacion","genero","isbn","resumen","portada"]
+    fields = ["titulo","autores","editorial","fechaPublicacion","genero","isbn","resumen","disponibilidad","portada"]
     template_name = 'nuevo_libro.html'
     success_url = reverse_lazy('Libreria')
 
@@ -63,6 +63,4 @@ class LibreriaPrestados(ListView):
     model = Libro
     template_name = 'libreria_prestados.html'
 
-    def get_queryset(self):
-        prestados = Libro.objects.filter(prestados="prestado")
-        return prestados
+    libros_prestados = Libro.objects.filter(disponibilidad="prestado")
