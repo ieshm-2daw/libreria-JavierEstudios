@@ -18,8 +18,11 @@ class DetalleLibro(DetailView):
 
 class NuevoLibro (CreateView):
     model = Libro
-    fields = ["titulo","autores","editorial","fechaPublicacion","genero","isbn","resumen","disponibilidad","portada"]
+    fields = ["titulo","autores","editorial","fechaPublicacion","genero","isbn","resumen","portada"]
     template_name = 'nuevo_libro.html'
+    def form_valid(self, form):
+        form.instance.disponibilidad = "disponible"
+        return super().form_valid(form)
     success_url = reverse_lazy('Libreria')
 
 class EditarLibro (UpdateView):
@@ -55,12 +58,14 @@ class PrestarLibro(View):
         Prestamo.objects.create(
             libro = libro,
             usuario = request.usuario,
+            estado = "prestado",
             fechaPrestamo = date.today()
         )
         return redirect('Disponibles', pk = pk)
 
 class LibreriaPrestados(ListView):
-    model = Libro
-    template_name = 'libreria_prestados.html'
-
-    libros_prestados = Libro.objects.filter(disponibilidad="prestado")
+    model = Prestamo
+    template_name = 'libreria_prestamos.html'
+    def get_queryset(self):
+        prestados = Prestamo.objects.filter(estado = "prestado")
+        return prestados
